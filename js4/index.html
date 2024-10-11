@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+</head>
+<body>
+
+<div>
+    <h1>Leap Year Checker</h1>
+    <label for="yearInput">Enter a year:</label><br>
+    <input type="number" id="yearInput" placeholder="Enter a number">
+    <button onclick="checkLeapYear()">Check</button>
+    <div class="result" id="result"></div>
+</div>
+
+<div class="container">
+    <h1>Even or Odd</h1>
+    <div class="output" id="output"></div>
+</div>
+
+<div class="container">
+    <h1>Palindrome Checker</h1>
+    <label for="textInput">Enter a string:</label><br>
+    <input type="text" id="textInput" placeholder="e.g. madam">
+    <button onclick="checkPalindrome()">Check Palindrome</button>
+    <div class="results" id="results"></div>
+</div>
+
+<script>
+    function checkLeapYear() {
+        const year = document.getElementById('yearInput').value;
+        let resultText = '';
+
+        
+        if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+            resultText = `${year} is a leap year.`;
+        } else {
+            resultText = `${year} isn't a leap year.`;
+        }
+
+        document.getElementById('result').innerText = resultText;
+    }
+
+    function checkEvenOdd() {
+        const outputDiv = document.getElementById('output');
+        let result = '';
+
+        for (let i = 0; i <= 15; i++) {
+            if (i % 2 === 0) {
+                result += `${i} is even.<br>`;
+            } else {
+                result += `${i} is odd.<br>`;
+            }
+        }
+
+        outputDiv.innerHTML = result;
+    }
+
+    // Run the function on page load to display the result
+    window.onload = checkEvenOdd;
+
+
+    function isPalindrome(str) {
+        // Remove non-alphanumeric characters and convert to lowercase
+        str = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+        let len = str.length;
+
+        // Check palindrome condition
+        for (let i = 0; i < len / 2; i++) {
+            if (str[i] !== str[len - 1 - i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function checkPalindrome() {
+        const inputString = document.getElementById('textInput').value;
+        let resultText = '';
+
+        if (inputString) {
+            if (isPalindrome(inputString)) {
+                resultText = `"${inputString}" is a palindrome.`;
+            } else {
+                resultText = `"${inputString}" is not a palindrome.`;
+            }
+        } else {
+            resultText = 'Please enter a valid string.';
+        }
+
+        document.getElementById('results').innerText = resultText;
+    }
+</script>
+
+
+</body>
+</html>
